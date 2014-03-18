@@ -1,0 +1,4 @@
+numpy
+scipy
+matplotlib
+http://wanda.fiu.edu/boeglinw/LabTools/_downloads/LabTools-0.2.tar.gz
