@@ -1,0 +1,9 @@
+#
+# example calibration data
+#
+#
+#! pos[f,0]/ energy[f,1]/ 
+275.     1.33
+243.     1.17
+145.3    0.667
+
