@@ -1,6 +1,6 @@
 from __future__ import division
 
-from math import exp, pi
+from math import exp, pi, sqrt
 
 from constants import Q, R, a
 
@@ -17,5 +17,17 @@ def summation(data_series):
 
 
 def find_C_for(data_series):
-    constant = Q / (4 * pi * pow(a, 3))
-    return constant * pow(summation(data_series), -1)
+    multiplier = Q / (4 * pi * pow(a, 3))
+    return multiplier * pow(summation(data_series), -1)
+
+
+def find_Q_for(data_series, m):
+    multiplier = 4 * pi * pow(a, 3 + m)
+    C = find_C_for(data_series)
+    return multiplier * C * summation(data_series)
+
+
+def find_rms_for(data_series):
+    return sqrt(
+        pow(a, 2) * find_Q_for(data_series, 2) / find_Q_for(data_series, 0)
+    )
