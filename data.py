@@ -41,8 +41,9 @@ class DataSet(object):
 
 
 class Node(object):
-    def __init__(self, data_tuples):
+    def __init__(self, data_tuples, dataset):
         self.data_tuples = map(tuple, (map(float, t) for t in data_tuples))
+        self.dataset = dataset
 
     @property
     def sum(self):
@@ -53,7 +54,7 @@ class Node(object):
         return find_C_for(self.data_tuples)
 
     def Q(self, m):
-        return find_Q_for(self.data_tuples, m)
+        return find_Q_for(self.data_tuples, m, self.dataset.C)
 
     @property
     def rms(self):

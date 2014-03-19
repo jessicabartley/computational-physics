@@ -21,9 +21,8 @@ def find_C_for(data_series):
     return multiplier * pow(summation(data_series), -1)
 
 
-def find_Q_for(data_series, m):
+def find_Q_for(data_series, m, C):
     multiplier = 4 * pi * pow(constants.a, 3 + m)
-    C = find_C_for(data_series)
     return multiplier * C * summation(data_series)
 
 
