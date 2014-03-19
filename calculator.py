@@ -2,11 +2,11 @@ from __future__ import division
 
 from math import exp, pi, sqrt
 
-from constants import Q, R, a
+import constants
 
 
 def summation_function(x, wx):
-    return pow(x, 2) / (exp(-x) + exp(-R/a)) * wx
+    return pow(x, 2) / (exp(-x) + exp(-constants.R/constants.a)) * wx
 
 
 def summation(data_series):
@@ -17,17 +17,15 @@ def summation(data_series):
 
 
 def find_C_for(data_series):
-    multiplier = Q / (4 * pi * pow(a, 3))
+    multiplier = constants.Q / (4 * pi * pow(constants.a, 3))
     return multiplier * pow(summation(data_series), -1)
 
 
 def find_Q_for(data_series, m):
-    multiplier = 4 * pi * pow(a, 3 + m)
+    multiplier = 4 * pi * pow(constants.a, 3 + m)
     C = find_C_for(data_series)
     return multiplier * C * summation(data_series)
 
 
-def find_rms_for(data_series):
-    return sqrt(
-        pow(a, 2) * find_Q_for(data_series, 2) / find_Q_for(data_series, 0)
-    )
+def find_rms_for(data_series, numerator, denominator):
+    return sqrt(pow(constants.a, 2) * numerator / denominator)
