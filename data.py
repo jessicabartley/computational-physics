@@ -24,12 +24,16 @@ def parse_file(fp):
 
 
 class DataSet(object):
+    def __init__(self):
+        self._nodes = []
+
     @property
     def nodes(self):
-        _nodes = []
+        if self._nodes:
+            return self._nodes
         for node_data in parse_file(DATA_SOURCE_FP):
-            _nodes.append(Node(node_data))
-        return _nodes
+            self._nodes.append(Node(node_data, self))
+        return self._nodes
 
 
 class Node(object):
