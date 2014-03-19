@@ -35,6 +35,10 @@ class DataSet(object):
             self._nodes.append(Node(node_data, self))
         return self._nodes
 
+    @property
+    def C(self):
+        return self.nodes[-1].C
+
 
 class Node(object):
     def __init__(self, data_tuples):
