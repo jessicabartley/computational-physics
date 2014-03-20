@@ -10,11 +10,9 @@ SPACER = '  '
 
 COLUMNS = OrderedDict([
     ('node', dict(align='^', width=4, format='')),
-    ('sum', dict(align='^', width=WIDTH, format='.6f')),
+    ('sum(0)', dict(align='^', width=WIDTH, format='.4E')),
+    ('sum(2)', dict(align='^', width=WIDTH, format='.4E')),
     ('C', dict(align='^', width=WIDTH, format='.8f')),
-    ('Q(2)', dict(align='^', width=WIDTH, format='.8f')),
-    ('Q(0)', dict(align='^', width=WIDTH, format='.7f')),
-    ('Q(2)/Q(0)', dict(align='^', width=WIDTH, format='.8f')),
     ('rms', dict(align='^', width=WIDTH, format='.8f')),
 ])
 
@@ -43,10 +41,7 @@ def main():
         _str = SPACER.join(
             '{{:>{width}{format}}}'.format(**v) for v in COLUMNS.values()
         )
-        output = _str.format(
-            i, node.sum, node.C, node.Q(2), node.Q(0), node.Q(2) / node.Q(0),
-            node.rms
-        )
+        output = _str.format(i, node.sum(0), node.sum(2), node.C, node.rms)
         print(output)
 
 

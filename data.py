@@ -1,6 +1,6 @@
 import re
 
-from calculator import find_C_for, find_Q_for, find_rms_for, summation
+from calculator import find_C_for, find_rms_for, summation
 from constants import DATA_SOURCE_FP
 
 
@@ -45,17 +45,13 @@ class Node(object):
         self.data_tuples = map(tuple, (map(float, t) for t in data_tuples))
         self.dataset = dataset
 
-    @property
-    def sum(self):
-        return summation(self.data_tuples)
+    def sum(self, m):
+        return summation(self.data_tuples, m)
 
     @property
     def C(self):
         return find_C_for(self.data_tuples)
 
-    def Q(self, m):
-        return find_Q_for(self.data_tuples, m, self.dataset.C)
-
     @property
     def rms(self):
-        return find_rms_for(self.data_tuples, self.Q(2), self.Q(0))
+        return find_rms_for(self.data_tuples, self.sum(2), self.sum(0))
