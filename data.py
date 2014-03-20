@@ -1,6 +1,6 @@
 import re
 
-from calculator import find_C_for, find_rms_for, summation
+from calculator import find_C_for, find_rms_radius_for, summation
 from constants import DATA_SOURCE_FP
 
 
@@ -53,5 +53,5 @@ class Node(object):
         return find_C_for(self.data_tuples)
 
     @property
-    def rms(self):
-        return find_rms_for(self.data_tuples, self.sum(2), self.sum(0))
+    def rms_radius(self):
+        return find_rms_radius_for(self.data_tuples, self.sum(2), self.sum(0))

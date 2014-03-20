@@ -21,5 +21,5 @@ def find_C_for(data_series):
     return multiplier * pow(summation(data_series, 0), -1)
 
 
-def find_rms_for(data_series, numerator, denominator):
+def find_rms_radius_for(data_series, numerator, denominator):
     return sqrt(pow(constants.a, 2) * numerator / denominator)
