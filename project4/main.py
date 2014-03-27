@@ -4,6 +4,8 @@ from __future__ import division
 from math import pi, sqrt
 from random import random
 
+# For this project we're assuming the sphere has a radius of 1
+
 AREA_OF_SQUARE = 4
 NUMBER_OF_ITERATIONS = 50000
 
