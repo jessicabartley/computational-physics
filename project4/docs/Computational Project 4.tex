@@ -36,9 +36,9 @@ Lets start with the familiar circle.  We need to accomplish the following:
 \item Draw (or imagine drawing) a circle inscribed in a square. Lets say this circle has radius 1 and center at the origin.  Thus the areas are $A_{circle}=\pi$ and $A_{square}=4$.
 \item Initiate counters $N_{hits}$ and $N_{total shots}$ at $0$.  Draw two random numbers $x$ and $y$ from a uniform distribution $P(x)=1$ where $x \in [0,1]$.  
 \item Rescale these values so that $\textbf r =(2x-1,2y-1)$.  This ensures that they appear somewhere within the area of the square.
-\item Increment the counters so that $N_{total shots}$ increases on each step and $N_{hits}=N_{hits}+1$ if $r^2 \leq 1$.
+\item Increment the counters so that $N_{total shots}$ increases on each step and $N_{hits}=N_{hits}+1$ if $r \leq 1$.
 \item We stop this loop at some arbitrary value and analyze the estimator $\hat \pi = 4 \cdot \frac {N_{hits}} {N_{total shots}}$
-\item Finally we analyze the error in our estimate via the variance: \newline $\sigma ^2 = 4^2 \cdot \frac{p (p-1)}{N_{totalshots}}$ where $p$ is the probability of making a hit, $p=\frac{A_{circle}}{A_{square}}$.
+\item Finally we analyze the error in our estimate via the variance: \newline $\sigma ^2 = 4^2 \cdot \frac{p (1-p)}{N_{totalshots}}$ where $p$ is the probability of making a hit, $p=\frac{A_{circle}}{A_{square}}$.
 \end{enumerate}
 \vspace{5 mm}
 
@@ -66,7 +66,7 @@ Where the cube's length is 2.  We are to repeat this process for spheres up to d
 The variance for the estimate of $\pi$ in $N$ dimensions is 
 
 \begin{equation}
-\sigma ^2 = 4^2 \cdot \left( \frac{1}{\Gamma(n/2+1)} \right) ^{4/n} \cdot \frac{p (p-1)}{N_{totalshots}}
+\sigma ^2 = 4^2 \cdot \left( \frac{1}{\Gamma(n/2+1)} \right) ^{4/n} \cdot \frac{p (1-p)}{N_{totalshots}}
 \end{equation}
 \vspace{5 mm}
 
