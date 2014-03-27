@@ -28,7 +28,7 @@ def is_within_circle(length):
 
 def estimate_pi(total_iterations):
     no_of_hits = 0
-    for i in range(total_iterations):
+    for i in xrange(total_iterations):
         coordinates = generate_coordinates(2)  # 2 dimensions only
         # `*coordinates` expands the coordinates iterable (could be a tuple or
         # list), and pass the individual elements as arguments to the
