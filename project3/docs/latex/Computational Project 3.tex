@@ -1,0 +1,74 @@
+\documentclass[11pt]{amsart}
+\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   % ... or a4paper or a5paper or ... 
+%\geometry{landscape}                % Activate for for rotated page geometry
+%\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{epstopdf}
+\usepackage [autostyle, english = american]{csquotes}
+\MakeOuterQuote{"}
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+\title{Project 3: Gauss-Laguerre Quadrature}
+%\author{Jessica Bartley}
+%\date{}                                           % Activate to display a given date or no date
+
+\begin{document}
+\maketitle
+%\section{}
+%\subsection{}
+
+The general idea for this project is that, for any atom, there is a charge distribution about some center.  We can use this charge distribution to calculate the dispersion of the atom's radius about this center location.  To find the charge we need to compute an integral, and we accomplish this via calculating several  sums using the so-called "Gauss-Laguerre Quadrature" method.  Our tasks include: 
+
+\begin{itemize}
+\item Calculating the normalization constant associated with each sum and then plotting these values for each increasing node in the sum.  This value should converge.
+\item Use our convergent normalization constant to calculate charge for several atoms, and then use this to calculate the root mean square radius for these atoms.
+\end{itemize}
+\vspace{5 mm}
+
+We are given the charge $Q$, a radius $R$, and a value $a$.  The charge distribution is given by the function
+
+\begin{equation}
+\rho(\textbf r) = \frac{C}{1+e^\frac{r-R}{a}}
+\end{equation}
+
+Where $C$ is the normalization constant, $\textbf r$ is the radius, and $R$ and $a$ are given values.  We wish to calculate the charge
+
+\begin{equation}
+Q = 4 \pi C \int \rho(\textbf r) d^3 r
+\end{equation}
+
+But we cannot calculate this integral directly, so we must approximate it using the sum
+
+\begin{equation}
+Q = 4 \pi a^3 C \sum \limits_{i=1}^n \frac{x_i^2}{e^{-x} + e^{-R/a}} \cdot w(x_i)
+\end{equation}
+
+For convenience we define $f(x_i)=\frac{x_i^2}{e^{-x} + e^{-R/a}}$.  The values for $x_i$ and $w(x_i)$ are given in a text file to be read into the program.  They are ordered by number of nodes, $n$, ranging from 1 to 16.  Thus, we will compute sixteen total sums in this program.
+\newline
+
+Next, because we are initially given Q, we solve for C and compute sixteen versions of this normalization constant:
+
+\begin{equation}
+C = \frac{Q}{4 \pi a^3} \cdot \left \{ { \sum \limits_{i=1}^n \frac{x_i^2}{e^{-x} + e^{-R/a}} \cdot w(x_i)} \right \} ^{-1}
+\end{equation}
+
+For $n=1...16$.  We need to plot these sixteen values for each node, $n$.
+\newline
+
+Next, we need to calculate the root mean square radius, given by:
+
+\begin{equation}
+r_{rms} = \sqrt{a^2 \cdot \frac{Q_2}{Q_0}}
+\end{equation}
+
+Where, now, the charge is no longer a given quantity and is computed via
+
+\begin{equation}
+Q_m = 4 \pi \cdot a^{3+m} \cdot C \sum \limits_{i=1}^n f(x_i) \cdot w(x_i)
+\end{equation}
+
+for $m=0,2$. Here, $C$ is the convergent value we previously calculated.
+
+\end{document}  

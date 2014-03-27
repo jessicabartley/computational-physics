@@ -2,8 +2,8 @@ from __future__ import division
 
 import os
 
-A = 40  # Atomic Mass
-Q = 20  # Atomic Number
+A = 238  # Atomic Mass
+Q = 92  # Atomic Number
 R = 1.1 * pow(A, 1/3)
 a = 0.55  # in fm
 
