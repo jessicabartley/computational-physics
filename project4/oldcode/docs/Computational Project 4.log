@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  31 MAR 2014 14:19
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  31 MAR 2014 14:18
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -446,27 +446,18 @@ LaTeX Info: Redefining \nameref on input line 18.
 \openout3 = `"Computational Project 4.out"'.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 23--24
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 25--27
+Underfull \hbox (badness 10000) in paragraph at lines 26--28
 
  []
 
 <circle.jpg, id=5, 46.2528pt x 45.771pt>
 File: circle.jpg Graphic file (type jpg)
  <use circle.jpg>
-Package pdftex.def Info: circle.jpg used on input line 30.
+Package pdftex.def Info: circle.jpg used on input line 31.
 (pdftex.def)             Requested size: 113.81102pt x 112.63158pt.
  [1{/usr/local/texlive/2013/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./ci
 rcle.jpg>]
-Underfull \hbox (badness 10000) in paragraph at lines 54--55
-
- []
-
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 77.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 78.
 
 Overfull \hbox (40.20769pt too wide) has occurred while \output is active
 [] \OT1/cmr/m/n/8 PROJECT 4: ESTIMATING THE VOLUME OF AN N DIMENSIONAL SPHERE U
@@ -474,10 +465,10 @@ SING MONTE CARLO METHODS
  []
 
 [2]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 77.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 78.
  (./Computational Project 4.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 77.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 77.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 78.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 78.
 Package rerunfilecheck Info: File `"Computational Project 4".out' has not chang
 ed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
@@ -499,11 +490,12 @@ sr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr
 /local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/l
 ocal/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/loca
 l/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local
-/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on "Computational Project 4.pdf" (2 pages, 126261 bytes).
+/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/t
+exlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on "Computational Project 4.pdf" (2 pages, 135836 bytes).
 PDF statistics:
- 74 PDF objects out of 1000 (max. 8388607)
- 58 compressed objects within 1 object stream
+ 78 PDF objects out of 1000 (max. 8388607)
+ 61 compressed objects within 1 object stream
  14 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 

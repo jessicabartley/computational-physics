@@ -4,26 +4,26 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 
 # retrieve the data
-data_file_Ca = B.get_file('ResultsConstantsCalcium.data')
-data_file_CaRMS = B.get_file('ResultsRadiusCalcium.data')
+data_file_Ca = B.get_file('data/ResultsConstantsCalcium.data')
+data_file_CaRMS = B.get_file('data/ResultsRadiusCalcium.data')
 
-data_file_Fe = B.get_file('ResultsConstantsIron.data')
-data_file_FeRMS = B.get_file('ResultsRadiusIron.data')
+data_file_Fe = B.get_file('data/ResultsConstantsIron.data')
+data_file_FeRMS = B.get_file('data/ResultsRadiusIron.data')
 
-data_file_Cu63 = B.get_file('ResultsConstantsCopper63.data')
-data_file_Cu63RMS = B.get_file('ResultsRadiusCopper63.data')
+data_file_Cu63 = B.get_file('data/ResultsConstantsCopper63.data')
+data_file_Cu63RMS = B.get_file('data/ResultsRadiusCopper63.data')
 
-data_file_Cu65 = B.get_file('ResultsConstantsCopper65.data')
-data_file_Cu65RMS = B.get_file('ResultsRadiusCopper65.data')
+data_file_Cu65 = B.get_file('data/ResultsConstantsCopper65.data')
+data_file_Cu65RMS = B.get_file('data/ResultsRadiusCopper65.data')
 
-data_file_Au = B.get_file('ResultsConstantsGold.data')
-data_file_AuRMS = B.get_file('ResultsRadiusGold.data')
+data_file_Au = B.get_file('data/ResultsConstantsGold.data')
+data_file_AuRMS = B.get_file('data/ResultsRadiusGold.data')
 
-data_file_Pb = B.get_file('ResultsConstantsLead.data')
-data_file_PbRMS = B.get_file('ResultsRadiusLead.data')
+data_file_Pb = B.get_file('data/ResultsConstantsLead.data')
+data_file_PbRMS = B.get_file('data/ResultsRadiusLead.data')
 
-data_file_U = B.get_file('ResultsConstantsUranium.data')
-data_file_URMS = B.get_file('ResultsRadiusUranium.data')
+data_file_U = B.get_file('data/ResultsConstantsUranium.data')
+data_file_URMS = B.get_file('data/ResultsRadiusUranium.data')
 
 # put the data into arrays
 node = range(1,17)
