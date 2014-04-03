@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  27 MAR 2014 17:01
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  2 APR 2014 14:39
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -463,9 +463,11 @@ File: cube.jpg Graphic file (type jpg)
  <use cube.jpg>
 Package pdftex.def Info: cube.jpg used on input line 38.
 (pdftex.def)             Requested size: 113.81102pt x 114.37074pt.
- [1{/usr/local/texlive/2013/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./cu
-be.jpg>] [2]
-<EnergyPlot.jpg, id=33, 803.0pt x 937.5025pt>
+
+Underfull \vbox (badness 2772) has occurred while \output is active []
+
+ [1{/usr/local/texlive/2013/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2 <
+./cube.jpg>] <EnergyPlot.jpg, id=31, 803.0pt x 937.5025pt>
 File: EnergyPlot.jpg Graphic file (type jpg)
  <use EnergyPlot.jpg>
 Package pdftex.def Info: EnergyPlot.jpg used on input line 77.
@@ -495,27 +497,25 @@ LaTeX Warning: There were multiply-defined labels.
 Here is how much of TeX's memory you used:
  7739 strings out of 493315
  110647 string characters out of 6137904
- 215570 words of memory out of 5000000
+ 214570 words of memory out of 5000000
  10922 multiletter control sequences out of 15000+600000
  11087 words of font info for 43 fonts, out of 8000000 for 9000
  1118 hyphenation exceptions out of 8191
- 42i,5n,28p,835b,452s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 42i,5n,28p,835b,458s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb
 ></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb>
 </usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><
-/usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></u
-sr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr
-/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/l
-ocal/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/loca
-l/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/t
-exlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/te
-xlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texl
-ive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on "Computational Project 5.pdf" (4 pages, 413280 bytes).
+/usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></u
+sr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr
+/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/lo
+cal/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local
+/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/
+texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
+Output written on "Computational Project 5.pdf" (4 pages, 399598 bytes).
 PDF statistics:
- 87 PDF objects out of 1000 (max. 8388607)
- 66 compressed objects within 1 object stream
+ 79 PDF objects out of 1000 (max. 8388607)
+ 60 compressed objects within 1 object stream
  14 named destinations out of 1000 (max. 500000)
  11 words of extra memory for PDF output out of 10000 (max. 10000000)
 
