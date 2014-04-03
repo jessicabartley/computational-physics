@@ -22,10 +22,10 @@ def create_initial_ensemble(no_molecules):
     return initial_ensemble
 
 
-def get_potential_energy(no_molecules, ensemble):
+def get_potential_energy(ensemble):
     potential_energy = 0
-    for i in xrange(no_molecules):
-        potential_energy += ensemble[i][2]
+    for molecule in ensemble.itervalues():
+        potential_energy += molecule[2]
     return potential_energy
 
 
@@ -41,9 +41,9 @@ def generate_trial_column(no_molecules, column_number):
     for i in xrange(6):
         ensemble[column_number][i] = ensemble[column_number][i] + (random() - 0.5) * EPSILON
         if ensemble[column_number][i] > 1:
-            ensemble[column_number][i] = ensemble[column_number][i] - 1
+            ensemble[column_number][i] = 1
         if ensemble[column_number][i] < 0:
-            ensemble[column_number][i] = ensemble[column_number][i] + 1
+            ensemble[column_number][i] = 0
     trial_column = ensemble[column_number]
     return trial_column
 
@@ -56,6 +56,7 @@ def get_probability_distribution(no_molecules, ensemble):
     probability_distribution = exp(-BETA * compute_hamiltonian(no_molecules, ensemble))
     return probability_distribution
 
+
 def create_updated_ensemble(no_molecules, ensemble):
     ensemble = create_initial_ensemble(no_molecules)
     for i in xrange(no_molecules):
@@ -63,9 +64,8 @@ def create_updated_ensemble(no_molecules, ensemble):
         trial_ensemble = ensemble[i][trial_column]
         if get_probability_distribution(no_molecules, trial_ensemble) >= get_probability_distribution(no_molecules, ensemble):
             ensemble = trial_ensemble
-        if get_probability_distribution(no_molecules, trial_ensemble) < get_probability_distribution(no_molecules, ensemble):
-            if get_probability_distribution(no_molecules, trial_ensemble) / get_probability_distribution(no_molecules, ensemble) >= random():
-              ensemble = trial_ensemble              
+        elif get_probability_distribution(no_molecules, trial_ensemble) / get_probability_distribution(no_molecules, ensemble) >= random():
+            ensemble = trial_ensemble              
     return ensemble
 
 
