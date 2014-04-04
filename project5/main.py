@@ -5,7 +5,6 @@ from collections import namedtuple
 from math import exp
 from random import random
 import argparse
-import os
 
 # For this project we're assuming the box has a edge length of 1
 
@@ -125,16 +124,7 @@ def setup_parser():
         '-i', '--iterations', metavar='ITERATIONS', type=int,
         default=1000, help='the number of sweeps'
     )
-    parser.add_argument(
-        '-o', '--output', metavar='FILENAME', default=os.devnull,
-        help='the output file of the result'
-    )
     return parser
-
-
-def output(content, file):
-    print(content)
-    print(content, file=file)
 
 
 def main():
@@ -142,11 +132,10 @@ def main():
     args = parser.parse_args()
 
     ensemble = create_initial_ensemble(args.no_of_molecules)
-    with open(args.output, 'w+') as of:
-        output(calculate_total_energy_for(ensemble), of)
-        for i in xrange(args.iterations):
-            ensemble = sweep(ensemble)
-            output(calculate_total_energy_for(ensemble), of)
+    print(calculate_total_energy_for(ensemble))
+    for i in xrange(args.iterations):
+        ensemble = sweep(ensemble)
+        print(calculate_total_energy_for(ensemble))
 
 
 if __name__ == '__main__':
