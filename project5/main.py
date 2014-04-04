@@ -83,7 +83,7 @@ def feeling_lucky(trial_molecule, molecule):
     current_p = get_probability_distribution(molecule)
     trial_p = get_probability_distribution(trial_molecule)
     if current_p:
-        return trial_p / current_p >= random()
+        return current_p / trial_p >= random()
     else:
         return False
 
