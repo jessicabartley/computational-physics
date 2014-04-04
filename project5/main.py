@@ -9,7 +9,7 @@ from random import random
 BETA = 4
 EPSILON = 0.2
 NUMBER_OF_MOLECULES = 10
-NUMBER_OF_SWEEPS = 100000
+NUMBER_OF_SWEEPS = 1000
 
 
 class ThreeD(object):
@@ -62,10 +62,13 @@ def calculate_total_energy_for(ensemble):
 
 
 def randomly_vary_numbers(numbers):
-    # TODO: We need to take into consideration the boundaries
     new_numbers = []
     for n in numbers:
-        new_numbers.append(n + (random() - .5) * EPSILON)
+        n = n + (random() - .5) * EPSILON
+        # Take into consideration cube boundaries
+        n = min(n, 1)
+        n = max(n, 0)
+        new_numbers.append(n)
     return tuple(new_numbers)
 
 
