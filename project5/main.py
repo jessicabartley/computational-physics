@@ -19,7 +19,8 @@ class ThreeD(object):
         self.y = y
         self.z = z
 
-    def as_tuple(self):
+    @property
+    def tuple(self):
         return (self.x, self.y, self.z)
 
 
@@ -38,7 +39,7 @@ class Molecule(object):
 
     @property
     def kinetic_energy(self):
-        return .5 * sum(map(lambda x: x ** 2, self.momentum.as_tuple()))
+        return .5 * sum(map(lambda x: x ** 2, self.momentum.tuple))
 
     @property
     def potential_energy(self):
@@ -68,10 +69,10 @@ def randomly_vary_numbers(numbers):
 
 def create_trial_molecule(molecule):
     new_position = Position(
-        *randomly_vary_numbers(molecule.position.as_tuple())
+        *randomly_vary_numbers(molecule.position.tuple)
     )
     new_momentum = Momentum(
-        *randomly_vary_numbers(molecule.momentum.as_tuple())
+        *randomly_vary_numbers(molecule.momentum.tuple)
     )
     return Molecule(new_position, new_momentum)
 
