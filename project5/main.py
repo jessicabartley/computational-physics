@@ -9,6 +9,7 @@ import os
 # For this project we're assuming the box has a edge length of 1
 
 BETA = 4
+BOX_LENGTH = 1
 EPSILON = 0.2
 NUMBER_OF_MOLECULES = 10
 NUMBER_OF_SWEEPS = 1000
@@ -68,7 +69,7 @@ def randomly_vary_numbers(numbers):
     for n in numbers:
         n = n + (random() - .5) * EPSILON
         # Take into consideration cube boundaries
-        n = min(n, 1)
+        n = min(n, BOX_LENGTH)
         n = max(n, 0)
         new_numbers.append(n)
     return tuple(new_numbers)
