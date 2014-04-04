@@ -55,13 +55,6 @@ def create_initial_ensemble(no_of_molecules):
     return [Molecule(initial_position, initial_momentum)] * no_of_molecules
 
 
-def calculate_total_energy_for(ensemble):
-    total_energy = 0
-    for molecule in ensemble:
-        total_energy += molecule.total_energy
-    return total_energy
-
-
 def randomly_vary_numbers(numbers):
     new_numbers = []
     for n in numbers:
@@ -85,6 +78,13 @@ def create_trial_molecule(molecule):
 
 def has_greater_energy(trial_molecule, molecule):
     return trial_molecule.total_energy >= molecule.total_energy
+
+
+def calculate_total_energy_for(ensemble):
+    total_energy = 0
+    for molecule in ensemble:
+        total_energy += molecule.total_energy
+    return total_energy
 
 
 def get_probability_distribution(ensemble):
