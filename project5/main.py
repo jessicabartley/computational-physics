@@ -73,27 +73,26 @@ def calculate_total_energy_for(ensemble):
     return total_energy
 
 
-def get_probability_distribution(ensemble):
-    return exp(-BETA * calculate_total_energy_for(ensemble))
+def get_probability_distribution(molecule):
+    # We can simplify this to molecular level, since we're only tweaking one
+    # molecule at a time.
+    return exp(-BETA * molecule.total_energy)
 
 
-def feeling_lucky(ensemble, trial_molecule, molecule):
-    index = ensemble.index(molecule)
-    trial_ensemble = list(ensemble)  # Copy the original ensemble
-    trial_ensemble[index] = trial_molecule
-    current_p = get_probability_distribution(ensemble)
-    trial_p = get_probability_distribution(trial_ensemble)
+def feeling_lucky(trial_molecule, molecule):
+    current_p = get_probability_distribution(molecule)
+    trial_p = get_probability_distribution(trial_molecule)
     if current_p:
         return trial_p / current_p >= random()
     else:
         return False
 
 
-def keep_or_replace_molecule(ensemble, molecule):
+def keep_or_replace_molecule(molecule):
     trial_molecule = create_trial_molecule(molecule)
     if has_greater_energy(trial_molecule, molecule):
         return trial_molecule
-    if feeling_lucky(ensemble, trial_molecule, molecule):
+    if feeling_lucky(trial_molecule, molecule):
         return trial_molecule
     return molecule
 
@@ -101,7 +100,7 @@ def keep_or_replace_molecule(ensemble, molecule):
 def sweep(ensemble):
     new_ensemble = []
     for molecule in ensemble:
-        new_ensemble.append(keep_or_replace_molecule(ensemble, molecule))
+        new_ensemble.append(keep_or_replace_molecule(molecule))
     return new_ensemble
 
 
