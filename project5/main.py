@@ -91,7 +91,7 @@ def get_probability_distribution(ensemble):
     return exp(-BETA * calculate_total_energy_for(ensemble))
 
 
-def roll_the_dice(ensemble, trial_molecule, molecule):
+def feeling_lucky(ensemble, trial_molecule, molecule):
     index = ensemble.index(molecule)
     trial_ensemble = list(ensemble)  # Copy the original ensemble
     trial_ensemble[index] = trial_molecule
@@ -107,7 +107,7 @@ def keep_or_replace_molecule(ensemble, molecule):
     trial_molecule = create_trial_molecule(molecule)
     if has_greater_energy(trial_molecule, molecule):
         return trial_molecule
-    if roll_the_dice(ensemble, trial_molecule, molecule):
+    if feeling_lucky(ensemble, trial_molecule, molecule):
         return trial_molecule
     return molecule
 
