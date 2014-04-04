@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 from __future__ import division, print_function
 
+from collections import namedtuple
 from math import exp
 from random import random
 import argparse
@@ -13,23 +14,8 @@ BOX_LENGTH = 1
 EPSILON = 0.2
 
 
-class ThreeD(object):
-    def __init__(self, x, y, z):
-        self.x = x
-        self.y = y
-        self.z = z
-
-    @property
-    def tuple(self):
-        return (self.x, self.y, self.z)
-
-
-class Position(ThreeD):
-    pass
-
-
-class Momentum(ThreeD):
-    pass
+Position = namedtuple('Position', 'x y z')
+Momentum = namedtuple('Momentum', 'x y z')
 
 
 class Molecule(object):
@@ -39,7 +25,7 @@ class Molecule(object):
 
     @property
     def kinetic_energy(self):
-        return .5 * sum(map(lambda x: x ** 2, self.momentum.tuple))
+        return .5 * sum(map(lambda x: x ** 2, self.momentum))
 
     @property
     def potential_energy(self):
@@ -69,10 +55,10 @@ def randomly_vary_numbers(numbers):
 
 def create_trial_molecule(molecule):
     new_position = Position(
-        *randomly_vary_numbers(molecule.position.tuple)
+        *randomly_vary_numbers(molecule.position)
     )
     new_momentum = Momentum(
-        *randomly_vary_numbers(molecule.momentum.tuple)
+        *randomly_vary_numbers(molecule.momentum)
     )
     return Molecule(new_position, new_momentum)
 
