@@ -1,8 +1,10 @@
 #!/usr/bin/env python
-from __future__ import division
+from __future__ import division, print_function
 
 from math import exp
 from random import random
+import argparse
+import os
 
 # For this project we're assuming the box has a edge length of 1
 
@@ -118,13 +120,39 @@ def sweep(ensemble):
     return new_ensemble
 
 
+def setup_parser():
+    """
+    Setup the command line utility.
+    """
+    desc = (
+        'Deriving the equilibrium energy of an ideal gas using markov chains'
+    )
+    parser = argparse.ArgumentParser(
+        description=desc,
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter
+    )
+    parser.add_argument(
+        '-o', '--output', metavar='FILENAME', default=os.devnull,
+        help='the output file of the result'
+    )
+    return parser
+
+
+def output(content, file):
+    print(content)
+    print(content, file=file)
+
+
 def main():
+    parser = setup_parser()
+    args = parser.parse_args()
+
     ensemble = create_initial_ensemble(NUMBER_OF_MOLECULES)
-    system_energies = [calculate_total_energy_for(ensemble)]
-    for i in xrange(NUMBER_OF_SWEEPS):
-        ensemble = sweep(ensemble)
-        system_energies.append(calculate_total_energy_for(ensemble))
-    print(system_energies)
+    with open(args.output, 'w+') as of:
+        output(calculate_total_energy_for(ensemble), of)
+        for i in xrange(NUMBER_OF_SWEEPS):
+            ensemble = sweep(ensemble)
+            output(calculate_total_energy_for(ensemble), of)
 
 
 if __name__ == '__main__':
