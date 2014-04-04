@@ -11,8 +11,6 @@ import os
 BETA = 4
 BOX_LENGTH = 1
 EPSILON = 0.2
-NUMBER_OF_MOLECULES = 10
-NUMBER_OF_SWEEPS = 1000
 
 
 class ThreeD(object):
@@ -133,6 +131,14 @@ def setup_parser():
         formatter_class=argparse.ArgumentDefaultsHelpFormatter
     )
     parser.add_argument(
+        '-n', '--molecules', metavar='NO_OF_MOLECULES', type=int, default=10,
+        dest='no_of_molecules', help='the number of molecules in the system'
+    )
+    parser.add_argument(
+        '-i', '--iterations', metavar='ITERATIONS', type=int,
+        default=1000, help='the number of sweeps'
+    )
+    parser.add_argument(
         '-o', '--output', metavar='FILENAME', default=os.devnull,
         help='the output file of the result'
     )
@@ -148,10 +154,10 @@ def main():
     parser = setup_parser()
     args = parser.parse_args()
 
-    ensemble = create_initial_ensemble(NUMBER_OF_MOLECULES)
+    ensemble = create_initial_ensemble(args.no_of_molecules)
     with open(args.output, 'w+') as of:
         output(calculate_total_energy_for(ensemble), of)
-        for i in xrange(NUMBER_OF_SWEEPS):
+        for i in xrange(args.iterations):
             ensemble = sweep(ensemble)
             output(calculate_total_energy_for(ensemble), of)
 
