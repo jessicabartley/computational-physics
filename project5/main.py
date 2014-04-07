@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 from __future__ import division, print_function
 
-from collections import namedtuple
 from math import exp
 from random import random
 import argparse
@@ -13,32 +12,11 @@ BOX_LENGTH = 1
 EPSILON = 0.2
 
 
-Position = namedtuple('Position', 'x y z')
-Momentum = namedtuple('Momentum', 'x y z')
-
-
-class Molecule(object):
-    def __init__(self, position, momentum):
-        self.position = position
-        self.momentum = momentum
-
-    @property
-    def kinetic_energy(self):
-        return .5 * sum(map(lambda x: x ** 2, self.momentum))
-
-    @property
-    def potential_energy(self):
-        return self.position.z
-
-    @property
-    def total_energy(self):
-        return self.kinetic_energy + self.potential_energy
-
-
 def create_initial_ensemble(no_of_molecules):
-    initial_position = Position(0.5, 0.5, 0)
-    initial_momentum = Momentum(0, 0, 0)
-    return [Molecule(initial_position, initial_momentum)] * no_of_molecules
+    initial_position = (0.5, 0.5, 0)
+    initial_momentum = (0, 0, 0)
+    molecule = {'position': initial_position, 'momentum': initial_momentum}
+    return [molecule] * no_of_molecules
 
 
 def randomly_vary_numbers(numbers):
@@ -53,30 +31,34 @@ def randomly_vary_numbers(numbers):
 
 
 def create_trial_molecule(molecule):
-    new_position = Position(
-        *randomly_vary_numbers(molecule.position)
-    )
-    new_momentum = Momentum(
-        *randomly_vary_numbers(molecule.momentum)
-    )
-    return Molecule(new_position, new_momentum)
+    new_position = randomly_vary_numbers(molecule['position'])
+    new_momentum = randomly_vary_numbers(molecule['momentum'])
+    return {'position': new_position, 'momentum': new_momentum}
+
+
+def calculate_energy_for(molecule):
+    kinetic = .5 * sum(map(lambda x: x ** 2, molecule['momentum']))
+    potential = molecule['position'][2]
+    return kinetic + potential
 
 
 def has_greater_energy(trial_molecule, molecule):
-    return trial_molecule.total_energy >= molecule.total_energy
+    trial_energy = calculate_energy_for(trial_molecule)
+    original_energy = calculate_energy_for(molecule)
+    return trial_energy >= original_energy
 
 
 def calculate_total_energy_for(ensemble):
     total_energy = 0
     for molecule in ensemble:
-        total_energy += molecule.total_energy
+        total_energy += calculate_energy_for(molecule)
     return total_energy
 
 
 def get_probability_distribution(molecule):
     # We can simplify this to molecular level, since we're only tweaking one
     # molecule at a time.
-    return exp(-BETA * molecule.total_energy)
+    return exp(-BETA * calculate_energy_for(molecule))
 
 
 def feeling_lucky(trial_molecule, molecule):
