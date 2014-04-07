@@ -57,6 +57,7 @@ Cu65_plot = plt.plot(node,Constants_Cu65, '-.o', label='Copper65')
 Au_plot = plt.plot(node,Constants_Au, '-.o', label='Gold')
 Pb_plot = plt.plot(node,Constants_Pb, '-.o', label='Lead')
 U_plot = plt.plot(node,Constants_U, '-.o', label='Uranium')
+
 plt.title('Normalization Constant vs Node Number')
 plt.legend() # shows legned
 plt.axis([0,16,-1,18]) # plt.axis([xmin,xmax,ymin,ymax])
