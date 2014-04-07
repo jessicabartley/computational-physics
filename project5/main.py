@@ -36,10 +36,16 @@ def create_trial_molecule(molecule):
     return {'position': new_position, 'momentum': new_momentum}
 
 
+def calculate_kinetic_energy_for(molecule):
+    return .5 * sum(map(lambda x: x ** 2, molecule['momentum']))
+
+
+def calculate_potential_energy_for(molecule):
+    return molecule['position'][2]
+
+
 def calculate_energy_for(molecule):
-    kinetic = .5 * sum(map(lambda x: x ** 2, molecule['momentum']))
-    potential = molecule['position'][2]
-    return kinetic + potential
+    return calculate_kinetic_energy_for(molecule) + calculate_potential_energy_for(molecule)
 
 
 def has_greater_energy(trial_molecule, molecule):
@@ -48,24 +54,22 @@ def has_greater_energy(trial_molecule, molecule):
     return trial_energy >= original_energy
 
 
-def calculate_total_energy_for(ensemble):
-    total_energy = 0
-    for molecule in ensemble:
-        total_energy += calculate_energy_for(molecule)
-    return total_energy
-
 def calculate_total_kinetic_energy_for(ensemble):
     total_kinetic_energy = 0
     for molecule in ensemble:
-        total_kinetic_energy += molecule.kinetic_energy
+        total_kinetic_energy += calculate_kinetic_energy_for(molecule)
     return total_kinetic_energy
 
 
 def calculate_total_potential_energy_for(ensemble):
     total_potential_energy = 0
     for molecule in ensemble:
-        total_potential_energy += molecule.potential_energy
+        total_potential_energy += calculate_potential_energy_for(molecule)
     return total_potential_energy
+
+
+def calculate_total_energy_for(ensemble):
+    return calculate_total_kinetic_energy_for(ensemble) + calculate_total_potential_energy_for(ensemble)
 
 
 def get_probability_distribution(molecule):
