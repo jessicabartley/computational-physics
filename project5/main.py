@@ -72,6 +72,19 @@ def calculate_total_energy_for(ensemble):
         total_energy += molecule.total_energy
     return total_energy
 
+def calculate_total_kinetic_energy_for(ensemble):
+    total_kinetic_energy = 0
+    for molecule in ensemble:
+        total_kinetic_energy += molecule.kinetic_energy
+    return total_kinetic_energy
+
+
+def calculate_total_potential_energy_for(ensemble):
+    total_potential_energy = 0
+    for molecule in ensemble:
+        total_potential_energy += molecule.potential_energy
+    return total_potential_energy
+
 
 def get_probability_distribution(molecule):
     # We can simplify this to molecular level, since we're only tweaking one
@@ -134,7 +147,12 @@ def main():
     print(calculate_total_energy_for(ensemble))
     for i in xrange(args.iterations):
         ensemble = sweep(ensemble)
-        print(calculate_total_energy_for(ensemble))
+        print(
+            i,
+            calculate_total_energy_for(ensemble), 
+            calculate_total_kinetic_energy_for(ensemble), 
+            calculate_total_potential_energy_for(ensemble)
+            )
 
 
 if __name__ == '__main__':
