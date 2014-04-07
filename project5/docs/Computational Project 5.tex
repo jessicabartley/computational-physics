@@ -62,10 +62,10 @@ What we need to do:
 \item It is possible, even if a trial configuration is not energetically favorable, that it might still randomly occur.  To account for this we calculate the probability of the energetically unfavorable event randomly occurring. The random event will occur if 
 
  \[
- \frac {P(trial)}{P(current)} \geq Y
+ \frac {P(current)}{P(trial)} \geq Y
 \]
 
-Where Y is a random number between 0 and 1.  Note, by nature of the Boltzmann probability, this ratio $ \frac {P(trial)}{P(current)}$ will always have a values between 0 and 1.  If this statement has a true value then we accept the trial configuration and replace the column.  If the ratio is less than the random number then we reject it and move on to the next particle (back to step 2).  This loop continues until we sweep over all particles.
+Where Y is a random number between 0 and 1.  Note, by nature of the Boltzmann probability, this ratio $ \frac {P(current)}{P(trial)}$ will always have a values between 0 and 1.  If this statement has a true value then we accept the trial configuration and replace the column.  If the ratio is less than the random number then we reject it and move on to the next particle (back to step 2).  This loop continues until we sweep over all particles.
 
 \item After a complete sweep over all particles in the ensemble we calculate the energy of the gas via Equation 2.  These values create the graph of Figure 2 (the first term of Eqation 2 is the kinetic energy portion and the second term is the potential energy portion.)  We need to create many sweeps until the energy values observed stabilize to a set value, as in Fig 2.  The end goal of this program is to find that stabilized value.
 
