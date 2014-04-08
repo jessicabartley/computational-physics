@@ -11,7 +11,7 @@
 \MakeOuterQuote{"}
 \DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
 
-\title{Project 6: Solving an Equation of Motion Using a Three Point Formula}
+\title{Project 6: Simple Solution to an Second Order Differential Equation Using a Mean Value Theorem Approximation}
 %\author{Jessica Bartley}
 %\date{}                                           % Activate to display a given date or no date
 
@@ -20,29 +20,14 @@
 %\section{}
 %\subsection{}
 
-This project is about solving a second order differential equation via a "symmetric 3-point" approximation.  To my knowledge, this is not a commonly used method as there as many other ways of numerically solving differential equations.  If we so desired we could probably do this in a much more efficient / more precise way.  Nonetheless, this project seems to be asking for us to solve an equation using this three point method.  This documentation will probably change from this original write up as I'm not entirely sure  (1) what I am being asked to accomplish in this project, and (2) how to use this three point formula.
-\newline
-
-The general idea as I understand it is to estimate a derivative using the slope of the lines drawn between three points.  Say we want to take a derivative of a function but we don't know what the function is.  This is the basis for all differential equation problems.  We have some equation that involves derivatives of a function $f$ but we don't know what that $f$ is.  Say the cosine curve in Fig. 1 is our $f$ that we do not know but want to take the derivative of.  The question is: how do we approximate the derivative of $f$.  If we have three equidistant points on a curve and we want to find the derivative of the curve at the middle point then we can approximate the derivative by taking the average of each of these three slopes, drawn in light purple in Fig 1.
-\newline
-
-\begin{figure}[ht!]
-\centering
-\includegraphics[width=100mm]{threepointapprox.jpg}
-\caption{Three Point Approximation For the Derivative}
-\label{overflow}
-\end{figure}
-
-\vspace{3 mm}
-
-For this project we want to solve the equation of motion of a harmonic oscillator that is driven by some torque.  This equation of motion is:
+This project is about solving a second order differential equation using the mean value theorem (or as it was called in class, a "symmetric three point approximation method").  We will do this by taking this second order differential equation and writing it as two coupled first order differential equations.  The second order differential equation (which happens to describe the motion of a driven pendulum) is:
 
 \begin{equation}
 \frac{d^{2} \theta}{d t^{2}} + \sin{\theta} = a \cos{\omega t}
 \end{equation}
 \vspace{2 mm}
 
-First, we rewrite this second order differential equation as two first order coupled differential equations using the substitutions $x=t$, $y_1 = \theta$, and $y_2 = \frac{d \theta}{d t}$:
+Where $t$ is time, $\theta$ is the angle the pendulum makes with the vertical, and $\omega$ is a frequency of the driving force.  The right hand side of this expression describes the driving force.  We can make the substations $y_1 = \theta$ and $y_2 = \frac{d y_1}{d t}$ so as to arrive at the two coupled first order differential equations:
 
 \begin{equation}
 \frac{d y_1}{dt} = y_2
@@ -50,16 +35,54 @@ First, we rewrite this second order differential equation as two first order cou
 \begin{equation}
 \frac{d y_2}{dt} = a \cos{\omega t}- \sin{y_1}
 \end{equation}
-
 \vspace{2 mm}
 
-Then we apply the three point formula to both of these derivatives.  We will call the first $f_1$ and the second $f_2$.  The general formula (which we will have to apply for each of $f_1$ and $f_2$) for the first derivative using the three-point method is:
+\textbf{The goal of this code is to plot three graphs: $y_1$ vs $t$, $y_2$ vs $t$, and $y_1$ vs $y_2$.}
+\newline
+
+We will use the mean value theorem when considering the derivatives of $y_1$ and $y_2$.  Although this code does not actually estimate $\frac{d y_1}{dt}$ or $\frac{d y_2}{dt}$ at any specific value, we use the derivative approximation formula (Eq 4) to solve for specific instances of $y_1$ and $y_2$.  These values will give a recursion relation that allows us to plot the required graphs.
 \newline
 
 \begin{equation}
 f \prime (x_0) = \frac{f(x_0 + h) - f(x_0 - h)}{2h}
 \end{equation}
+\vspace{2 mm}
 
 Where $x_0$ is the middle point of interest and $h$ is the distance between points.
+\newline
+
+In general, we can estimate the derivative of any function $f$ at the value $x_0$ if we know one point on the function to either side of $f(x_0)$.  The derivative $f \prime (x_0)$ is estimated by the slope of the secant line connecting the two symmetric points.  If the function is continuous and differentiable on the interval then the mean vale theorem, illustrated in Fig 1, guarantees that there exists a point somewhere between $x_0 - h$ and $x_0 +h$ that has a tangent line equal to the slope of the derivative.  We are approximating the slope at  $x_0$ as this secant slope.
+\newline
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=120mm]{MeanValueTheorem.jpg}
+\caption{We use the mean value theorem to approximate the derivative of some function evaluated at the midpoint between two bounds.}
+\label{overflow}
+\end{figure}
+
+\vspace{3 mm}
+
+Now, it is important to note that for this code we are never actually approximating a derivative.  When we apply Equation 4 to $y_1$ and $y_2$ (defined in Equation 2 and 3) and rearrange we get:
+
+\begin{equation}
+y_1(t+h) = 2h y_2(t) + y_1(t-h)
+\end{equation}
+
+\begin{equation}
+y_2(t+h) = 2h \left[- \sin{y_1(t)}+a \cos{\omega t} \right] + y_2(t-h)
+\end{equation}
+\vspace{2 mm}
+
+This is our recursion relation.  We will start with some initial conditions and use these equations to step $y_1$ and $y_2$ forward so that we find the functions at these sequential values of t.  Then we will plot $y_1$ vs $t$, $y_2$ vs $t$, and $y_1$ vs $y_2$.  The latter of which should be an ellipse. 
+\newline
+
+The steps for the code include:
+\begin{enumerate}
+\item  Declaring the initial conditions $y_1(0)=0$, $y_2(0)=0$, $y_1(-h)=0$, ,$y_2(-h)=0$ and another other parameters such as $\omega$ or $h$.
+\item Calculating $y_1(t+h)$ and $y_2(t+h)$ via Equations 5 and 6.  We will loop through this step to get out many sequential values of $y_1$ and $y_2$.
+\item Then we plot the graphs.
+\end{enumerate}
+
 
 \end{document}  
