@@ -27,7 +27,7 @@ This project is about solving a second order differential equation using the mea
 \end{equation}
 \vspace{2 mm}
 
-Where $t$ is time, $\theta$ is the angle the pendulum makes with the vertical, and $\omega$ is a frequency of the driving force.  The right hand side of this expression describes the driving force.  We can make the substations $y_1 = \theta$ and $y_2 = \frac{d y_1}{d t}$ so as to arrive at the two coupled first order differential equations:
+Where $t$ is time, $\theta$ is the angle the pendulum makes with the vertical, and $\omega$ is a frequency of the driving force.  The right hand side of this expression describes the driving force.  We can make the substitutions $y_1 = \theta$ and $y_2 = \frac{d y_1}{d t}$ so as to arrive at the two coupled first order differential equations:
 
 \begin{equation}
 \frac{d y_1}{dt} = y_2
@@ -51,7 +51,7 @@ f \prime (x_0) = \frac{f(x_0 + h) - f(x_0 - h)}{2h}
 Where $x_0$ is the middle point of interest and $h$ is the distance between points.
 \newline
 
-In general, we can estimate the derivative of any function $f$ at the value $x_0$ if we know one point on the function to either side of $f(x_0)$.  The derivative $f \prime (x_0)$ is estimated by the slope of the secant line connecting the two symmetric points.  If the function is continuous and differentiable on the interval then the mean vale theorem, illustrated in Fig 1, guarantees that there exists a point somewhere between $x_0 - h$ and $x_0 +h$ that has a tangent line equal to the slope of the derivative.  We are approximating the slope at  $x_0$ as this secant slope.
+In general, we can estimate the derivative of any function $f$ at the value $x_0$ if we know one point on the function to either side of $f(x_0)$.  The derivative $f \prime (x_0)$ is estimated by the slope of the secant line connecting the two symmetric points.  If the function is continuous and differentiable on the interval then the mean value theorem, illustrated in Fig 1, guarantees that there exists a point somewhere between $x_0 - h$ and $x_0 +h$ that has a tangent line equal to the slope of the derivative.  We are approximating the slope at  $x_0$ as this secant slope.
 \newline
 
 \begin{figure}[ht!]
@@ -74,7 +74,7 @@ y_2(t+h) = 2h \left[- \sin{y_1(t)}+a \cos{\omega t} \right] + y_2(t-h)
 \end{equation}
 \vspace{2 mm}
 
-This is our recursion relation.  We will start with some initial conditions and use these equations to step $y_1$ and $y_2$ forward so that we find the functions at these sequential values of t.  Then we will plot $y_1$ vs $t$, $y_2$ vs $t$, and $y_1$ vs $y_2$.  The latter of which should be an ellipse. 
+This is our recursion relation.  We will start with some initial conditions and use these equations to step $y_1$ and $y_2$ forward so that we find these functions at sequential values of t.  Then we will plot $y_1$ vs $t$, $y_2$ vs $t$, and $y_1$ vs $y_2$.  The latter of which should be an ellipse. 
 \newline
 
 The steps for the code include:
