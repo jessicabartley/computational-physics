@@ -10,23 +10,15 @@ TIME_STOP = 10000
 
 
 def initial_angles():
-    initial_angle_2 = {'time': 0, 'angle': 0}
     initial_angle_1 = {'time': - STEP, 'angle': 0}
+    initial_angle_2 = {'time': 0, 'angle': 0}
     return {'first_point': initial_angle_1, 'second_point': initial_angle_2}
 
 
 def initial_velocities():
-    initial_velocity_2 = {'time': 0, 'velocity': 0}
     initial_velocity_1 = {'time': - STEP, 'velocity': 0}
+    initial_velocity_2 = {'time': 0, 'velocity': 0}
     return {'first_point': initial_velocity_1, 'second_point': initial_velocity_2}
-
-
-def initial_system(angle, velocity):
-    return {'angle_coordinate': angle, 'velocity_coordinate': velocity}
-
-
-def next_system(angle, velocity):
-    return {'angle_coordinate': angle, 'velocity_coordinate': velocity}
 
 
 def create_time_sequence():
