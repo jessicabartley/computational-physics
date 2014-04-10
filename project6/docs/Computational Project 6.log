@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  7 APR 2014 20:22
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  10 APR 2014 11:59
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -484,7 +484,11 @@ UATION USING A MEAN VALUE THEOREM APPROXIMATION
  []
 
 [2 <./MeanValueTheorem.jpg>]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 88.
+Underfull \hbox (badness 10000) in paragraph at lines 80--82
+
+ []
+
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 91.
 
 Overfull \hbox (165.70256pt too wide) has occurred while \output is active
  \OT1/cmr/m/n/8 PROJECT 6: SIMPLE SOLUTION TO AN SECOND ORDER DIFFERENTIAL EQUA
@@ -492,10 +496,10 @@ TION USING A MEAN VALUE THEOREM APPROXIMATION []
  []
 
 [3]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 88.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 91.
  (./Computational Project 6.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 88.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 88.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 91.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 91.
 Package rerunfilecheck Info: File `"Computational Project 6".out' has not chang
 ed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
@@ -516,7 +520,7 @@ usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></us
 r/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/l
 ocal/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/loca
 l/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on "Computational Project 6.pdf" (3 pages, 181985 bytes).
+Output written on "Computational Project 6.pdf" (3 pages, 183681 bytes).
 PDF statistics:
  67 PDF objects out of 1000 (max. 8388607)
  52 compressed objects within 1 object stream

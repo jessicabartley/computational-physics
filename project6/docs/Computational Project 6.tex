@@ -37,7 +37,7 @@ Where $t$ is time, $\theta$ is the angle the pendulum makes with the vertical, a
 \end{equation}
 \vspace{2 mm}
 
-\textbf{The goal of this code is to plot three graphs: $y_1$ vs $t$, $y_2$ vs $t$, and $y_1$ vs $y_2$.}
+\textbf{The goal of this code is to plot three graphs: $y_1$ vs $t$ (angle vs time), $y_2$ vs $t$ (angular velocity vs time), and $y_1$ vs $y_2$ (angle vs angular velocity).}
 \newline
 
 We will use the mean value theorem when considering the derivatives of $y_1$ and $y_2$.  Although this code does not actually estimate $\frac{d y_1}{dt}$ or $\frac{d y_2}{dt}$ at any specific value, we use the derivative approximation formula (Eq 4) to solve for specific instances of $y_1$ and $y_2$.  These values will give a recursion relation that allows us to plot the required graphs.
@@ -74,7 +74,10 @@ y_2(t+h) = 2h \left[- \sin{y_1(t)}+a \cos{\omega t} \right] + y_2(t-h)
 \end{equation}
 \vspace{2 mm}
 
-This is our recursion relation.  We will start with some initial conditions and use these equations to step $y_1$ and $y_2$ forward so that we find these functions at sequential values of t.  Then we will plot $y_1$ vs $t$, $y_2$ vs $t$, and $y_1$ vs $y_2$.  The latter of which should be an ellipse. 
+This is our recursion relation.  We will start with some initial conditions and use these equations to step $y_1$ and $y_2$ forward so that we find these functions at sequential values of t.  Then we will plot $y_1$ vs $t$, $y_2$ vs $t$, and $y_1$ vs $y_2$.  The latter of which should be an ellipse.
+\newline
+
+Note, this is not an ideal method to numerically solve differential equations.  Because of this we will see discretization error propagate across our results.  If this error did not exist then our $y_1$ vs $y_2$ graph would be a periodic ellipse.  It actuality this graph will not be periodic, but it should look something like an ellipse at the beginning.
 \newline
 
 The steps for the code include:
