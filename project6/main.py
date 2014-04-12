@@ -25,13 +25,8 @@ def initial_velocities():
     }
 
 
-def create_time_sequence():
-    t = 0
-    time_sequence = []
-    for i in xrange(TIME_STOP):
-        t += STEP
-        time_sequence.append(t)
-    return time_sequence
+def create_time_sequence(no_of_iterations):
+    return [STEP * i for i in xrange(1, no_of_iterations + 1)]
 
 
 def get_next_angle(angle, velocity):
@@ -83,11 +78,15 @@ def drive_the_system(time_sequence):
     return system
 
 
-def main(time_sequence):
-    for i in xrange(time_sequence):
-        time = drive_the_system(create_time_sequence())['time']
-        angle = drive_the_system(create_time_sequence())['angle']
-        velocity = drive_the_system(create_time_sequence())['velocity']
+def main(no_of_iterations):
+    for i in xrange(no_of_iterations):
+        time = drive_the_system(create_time_sequence(no_of_iterations))['time']
+        angle = drive_the_system(
+            create_time_sequence(no_of_iterations)
+        )['angle']
+        velocity = drive_the_system(
+            create_time_sequence(no_of_iterations)
+        )['velocity']
         data = zip(time, angle, velocity)
         print data[i][0], data[i][1], data[i][2]
 
