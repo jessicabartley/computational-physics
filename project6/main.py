@@ -1,12 +1,12 @@
 from __future__ import division
 
-from math import cos, sin 
+from math import cos, sin
 
 
-DRIVING_FREQENCY = 1
-DRIVING_AMPLITUDE = 1
-STEP = 0.0005            # step forward in time
-TIME_STOP = 10000
+DRIVING_FREQENCY = 5
+DRIVING_AMPLITUDE = .1
+STEP = 0.005            # step forward in time
+TIME_STOP = 2000
 
 
 def initial_angles():
