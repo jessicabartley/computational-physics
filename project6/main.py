@@ -10,6 +10,10 @@ STEP = 0.005  # step forward in time
 TIME_STOP = 2000
 
 
+def create_time_sequence(no_of_iterations):
+    return [STEP * i for i in xrange(1, no_of_iterations + 1)]
+
+
 def initial_angles():
     initial_angle_1 = {'time': - STEP, 'angle': 0}
     initial_angle_2 = {'time': 0, 'angle': 0}
@@ -23,10 +27,6 @@ def initial_velocities():
         'first_point': initial_velocity_1,
         'second_point': initial_velocity_2
     }
-
-
-def create_time_sequence(no_of_iterations):
-    return [STEP * i for i in xrange(1, no_of_iterations + 1)]
 
 
 def get_next_angle(angle, velocity):
@@ -79,15 +79,12 @@ def drive_the_system(time_sequence):
 
 
 def main(no_of_iterations):
+    time_sequence = create_time_sequence(no_of_iterations)
+    the_system = drive_the_system(time_sequence)
+    data = zip(
+        the_system['time'], the_system['angle'], the_system['velocity']
+    )
     for i in xrange(no_of_iterations):
-        time = drive_the_system(create_time_sequence(no_of_iterations))['time']
-        angle = drive_the_system(
-            create_time_sequence(no_of_iterations)
-        )['angle']
-        velocity = drive_the_system(
-            create_time_sequence(no_of_iterations)
-        )['velocity']
-        data = zip(time, angle, velocity)
         print data[i][0], data[i][1], data[i][2]
 
 
