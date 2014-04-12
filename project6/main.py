@@ -18,7 +18,10 @@ def initial_angles():
 def initial_velocities():
     initial_velocity_1 = {'time': - STEP, 'velocity': 0}
     initial_velocity_2 = {'time': 0, 'velocity': 0}
-    return {'first_point': initial_velocity_1, 'second_point': initial_velocity_2}
+    return {
+        'first_point': initial_velocity_1,
+        'second_point': initial_velocity_2
+    }
 
 
 def create_time_sequence():
@@ -32,29 +35,30 @@ def create_time_sequence():
 
 def get_next_angle(angle, velocity):
     return 2 * STEP * velocity + angle
-    
+
 
 def get_next_velocity(time, angle, velocity):
-    return 2 * STEP * ( - sin(angle) + DRIVING_AMPLITUDE * cos(DRIVING_FREQENCY * time) ) + velocity
+    return 2 * STEP * (
+        -sin(angle) + DRIVING_AMPLITUDE * cos(DRIVING_FREQENCY * time)
+    ) + velocity
 
 
 def drive_the_system(time_sequence):
-
     angle = [
-        initial_angles()['first_point']['angle'], 
-        initial_angles()['second_point']['angle'] 
-        ]
-    
-    velocity = [ 
+        initial_angles()['first_point']['angle'],
+        initial_angles()['second_point']['angle']
+    ]
+
+    velocity = [
         initial_velocities()['first_point']['velocity'],
         initial_velocities()['second_point']['velocity']
-        ]
+    ]
 
     time = [
         initial_angles()['first_point']['time'],
         initial_angles()['second_point']['time']
-        ]
-    
+    ]
+
     first_angle = angle[0]
     second_angle = angle[1]
     first_velocity = velocity[0]
@@ -77,13 +81,15 @@ def drive_the_system(time_sequence):
     system = {'time': time, 'angle': angle, 'velocity': velocity}
     return system
 
+
 def main(time_sequence):
     for i in xrange(time_sequence):
-        time =  drive_the_system(create_time_sequence())['time']
+        time = drive_the_system(create_time_sequence())['time']
         angle = drive_the_system(create_time_sequence())['angle']
         velocity = drive_the_system(create_time_sequence())['velocity']
         data = zip(time, angle, velocity)
         print data[i][0], data[i][1], data[i][2]
 
-main(TIME_STOP)
 
+if __name__ == '__main__':
+    main(TIME_STOP)
