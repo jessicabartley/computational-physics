@@ -81,11 +81,10 @@ def drive_the_system(time_sequence):
 def main(no_of_iterations):
     time_sequence = create_time_sequence(no_of_iterations)
     the_system = drive_the_system(time_sequence)
-    data = zip(
-        the_system['time'], the_system['angle'], the_system['velocity']
-    )
     for i in xrange(no_of_iterations):
-        print data[i][0], data[i][1], data[i][2]
+        print(the_system['time'][i]),
+        print(the_system['angle'][i]),
+        print(the_system['velocity'][i])
 
 
 if __name__ == '__main__':
