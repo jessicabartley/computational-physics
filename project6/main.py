@@ -10,82 +10,65 @@ STEP = 0.005  # step forward in time
 TIME_STOP = 2000
 
 
-def create_time_sequence(no_of_iterations):
-    return [STEP * i for i in xrange(1, no_of_iterations + 1)]
+def add_node_to_the_system(the_system, node):
+    """node comes in the form of `(angle, velocity, time)`"""
+    a, v, t = node
+    the_system.append({'angle': a, 'velocity': v, 'time': t})
 
 
-def initial_angles():
-    initial_angle_1 = {'time': - STEP, 'angle': 0}
-    initial_angle_2 = {'time': 0, 'angle': 0}
-    return {'first_point': initial_angle_1, 'second_point': initial_angle_2}
+def initialize_the_system():
+    initial_data = ((0, 0, -STEP), (0, 0, 0))
+    initial_system = []
+    for node in initial_data:
+        add_node_to_the_system(initial_system, node)
+    return initial_system
 
 
-def initial_velocities():
-    initial_velocity_1 = {'time': - STEP, 'velocity': 0}
-    initial_velocity_2 = {'time': 0, 'velocity': 0}
-    return {
-        'first_point': initial_velocity_1,
-        'second_point': initial_velocity_2
-    }
+def get_next_angle(angle, velocity, step):
+    return 2 * step * velocity + angle
 
 
-def get_next_angle(angle, velocity):
-    return 2 * STEP * velocity + angle
-
-
-def get_next_velocity(time, angle, velocity):
-    return 2 * STEP * (
-        -sin(angle) + DRIVING_AMPLITUDE * cos(DRIVING_FREQENCY * time)
+def get_next_velocity(time, angle, velocity, step, amplitude, frequency):
+    return 2 * step * (
+        -sin(angle) + amplitude * cos(frequency * time)
     ) + velocity
 
 
-def drive_the_system(time_sequence):
-    angle = [
-        initial_angles()['first_point']['angle'],
-        initial_angles()['second_point']['angle']
-    ]
+def drive_the_system(iterations, step, amplitude, frequency):
+    # Represent the system data structure as
+    # [{'angle': x, 'velocity': y, 'time': z}, ...]
+    the_system = initialize_the_system()
 
-    velocity = [
-        initial_velocities()['first_point']['velocity'],
-        initial_velocities()['second_point']['velocity']
-    ]
+    angle1 = the_system[0]['angle']
+    angle2 = the_system[1]['angle']
+    velocity1 = the_system[0]['velocity']
+    velocity2 = the_system[1]['velocity']
 
-    time = [
-        initial_angles()['first_point']['time'],
-        initial_angles()['second_point']['time']
-    ]
+    for i in xrange(1, iterations + 1):
+        t = step * i
+        next_angle = get_next_angle(angle1, velocity2, step)
+        next_velocity = get_next_velocity(
+            t, angle2, velocity1, step, amplitude, frequency
+        )
+        add_node_to_the_system(the_system, (next_angle, next_velocity, t))
 
-    first_angle = angle[0]
-    second_angle = angle[1]
-    first_velocity = velocity[0]
-    second_velocity = velocity[1]
+        angle1 = angle2
+        angle2 = next_angle
+        velocity1 = velocity2
+        velocity2 = next_velocity
 
-    for t in time_sequence:
-
-        next_angle = get_next_angle(first_angle, second_velocity)
-        next_velocity = get_next_velocity(t, second_angle, first_velocity)
-
-        angle.append(next_angle)
-        velocity.append(next_velocity)
-        time.append(t)
-
-        first_angle = second_angle
-        second_angle = next_angle
-        first_velocity = second_velocity
-        second_velocity = next_velocity
-
-    system = {'time': time, 'angle': angle, 'velocity': velocity}
-    return system
+    return the_system
 
 
-def main(no_of_iterations):
-    time_sequence = create_time_sequence(no_of_iterations)
-    the_system = drive_the_system(time_sequence)
-    for i in xrange(no_of_iterations):
-        print(the_system['time'][i]),
-        print(the_system['angle'][i]),
-        print(the_system['velocity'][i])
+def main():
+    the_system = drive_the_system(
+        TIME_STOP, STEP, DRIVING_AMPLITUDE, DRIVING_FREQENCY
+    )
+    for node in the_system:
+        print(node['time']),
+        print(node['angle']),
+        print(node['velocity'])
 
 
 if __name__ == '__main__':
-    main(TIME_STOP)
+    main()
