@@ -5,7 +5,6 @@ from __future__ import division
 from math import acos, atan
 from numpy import array, cos, cross, dot, linspace, sin
 from numpy.linalg import norm
-#from numpy.ndarray import tolist
 from pylab import plot, show, xlabel, ylabel
 from scipy.integrate import odeint
 
@@ -56,8 +55,6 @@ def get_velocities(position, velocity, angular_momentum):
         angular_momentum
     )['vector']
 
-#    print norm(transformed_position), norm(transformed_velocity), norm(transformed_angular_momentum)
-
     position_magnitude = initialize_earth_sun_plane()['position_magnitude']
     phi_vector = cross(transformed_angular_momentum, transformed_position)
     phi_magnitude = norm(phi_vector)
@@ -73,17 +70,13 @@ def get_velocities(position, velocity, angular_momentum):
 def differential_equations(y, time, angular_momentum_magnitude):
     GM = 1 / (5 * 10 ** 2)
     # dy[0]/dt = y[1]
-    a = ((angular_momentum_magnitude ** 2) / (y[0] ** 3))
-    b = 1 / (y[0] ** 2)
     g0 = y[1]
     # dy[1]/dt = -dU/dt = a/y[0]**3 + b/y[0]**2
     g1 = ((angular_momentum_magnitude ** 2) / (y[0] ** 3)) - \
         (GM / (y[0] ** 2))
-    #print b/a, GM*b/a
-    #g2 = angular_momentum_magnitude / (y[0] ** 2)
     g2 = angular_momentum_magnitude / y[0]**2
     g3 = -(2 * angular_momentum_magnitude * y[1]) / (y[0] ** 3)
-    return array([ g0, g1, g2, g3 ]) # g's are the derivatives of y
+    return array([g0, g1, g2, g3])  # g's are the derivatives of y
 
 
 def main():
@@ -92,8 +85,6 @@ def main():
     es_position = initial_earth_sun_plane['position']
     es_velocity = initial_earth_sun_plane['velocity']
     es_angular_momentum = get_angular_momentum(es_position, es_velocity)
-
-#    print norm(es_position), norm(es_velocity), es_angular_momentum['magnitude']
 
     # set up initial conditions in comet sun plane
     initial_radius = initial_earth_sun_plane['position_magnitude']
@@ -115,9 +106,8 @@ def main():
         args=(es_angular_momentum['magnitude'],)
     )
 
-    for row in xrange(NUMBER_OF_STEPS):
-        print row, answer[row, 0], answer[row, 1], answer[row, 2], answer[row, 3]
-
+    for i, row in enumerate(answer, start=1):
+        print('{:>4}: {: .8f} {: .8f} {: .8f} {: .8f}'.format(i, *row))
 
     # convert to cartesian
     xdata = (answer[:, 0]) * cos(answer[:, 2])
