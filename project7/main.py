@@ -2,9 +2,10 @@
 
 from __future__ import division
 
-from math import acos
+from math import acos, atan
 from numpy import array, cos, cross, dot, linspace, sin
 from numpy.linalg import norm
+#from numpy.ndarray import tolist
 from pylab import plot, show, xlabel, ylabel
 from scipy.integrate import odeint
 
@@ -36,7 +37,7 @@ def transform_to_comet_sun_plane(vector):
 
     # use z component of l hat to get theta, x component to get phi
     theta = acos(l_unit_vector[2])
-    phi = acos(l_unit_vector[0] / sin(theta))
+    phi = atan(l_unit_vector[1] / l_unit_vector[0])
 
     rotation_matrix = array([
         [cos(theta) * cos(phi), cos(theta) * sin(phi), sin(theta)],
@@ -55,6 +56,8 @@ def get_velocities(position, velocity, angular_momentum):
         angular_momentum
     )['vector']
 
+#    print norm(transformed_position), norm(transformed_velocity), norm(transformed_angular_momentum)
+
     position_magnitude = initialize_earth_sun_plane()['position_magnitude']
     phi_vector = cross(transformed_angular_momentum, transformed_position)
     phi_magnitude = norm(phi_vector)
@@ -68,12 +71,19 @@ def get_velocities(position, velocity, angular_momentum):
 
 
 def differential_equations(y, time, angular_momentum_magnitude):
+    GM = 1 / (5 * 10 ** 2)
+    # dy[0]/dt = y[1]
+    a = ((angular_momentum_magnitude ** 2) / (y[0] ** 3))
+    b = 1 / (y[0] ** 2)
     g0 = y[1]
-    g1 = -((angular_momentum_magnitude ** 2) / (y[0] ** 3)) + \
-        (1 / (y[0] ** 2))
-    g2 = y[3] / (y[0] ** 2)
-    g3 = 0
-    return array([g0, g1, g2, g3])
+    # dy[1]/dt = -dU/dt = a/y[0]**3 + b/y[0]**2
+    g1 = ((angular_momentum_magnitude ** 2) / (y[0] ** 3)) - \
+        (GM / (y[0] ** 2))
+    #print b/a, GM*b/a
+    #g2 = angular_momentum_magnitude / (y[0] ** 2)
+    g2 = angular_momentum_magnitude / y[0]**2
+    g3 = -(2 * angular_momentum_magnitude * y[1]) / (y[0] ** 3)
+    return array([ g0, g1, g2, g3 ]) # g's are the derivatives of y
 
 
 def main():
@@ -82,6 +92,8 @@ def main():
     es_position = initial_earth_sun_plane['position']
     es_velocity = initial_earth_sun_plane['velocity']
     es_angular_momentum = get_angular_momentum(es_position, es_velocity)
+
+#    print norm(es_position), norm(es_velocity), es_angular_momentum['magnitude']
 
     # set up initial conditions in comet sun plane
     initial_radius = initial_earth_sun_plane['position_magnitude']
@@ -97,11 +109,15 @@ def main():
         [initial_radius, initial_velocity_r, initial_phi, initial_velocity_phi]
     )
 
-    time = linspace(0, 10, NUMBER_OF_STEPS)
+    time = linspace(0, 5000, NUMBER_OF_STEPS)
     answer = odeint(
         differential_equations, y, time,
         args=(es_angular_momentum['magnitude'],)
     )
+
+    for row in xrange(NUMBER_OF_STEPS):
+        print row, answer[row, 0], answer[row, 1], answer[row, 2], answer[row, 3]
+
 
     # convert to cartesian
     xdata = (answer[:, 0]) * cos(answer[:, 2])
